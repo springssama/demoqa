@@ -1,13 +1,11 @@
 package guru.qa.tests;
 
 import com.github.javafaker.Faker;
-import com.codeborne.selenide.Configuration;
 import guru.qa.tests.components.CalendarComponent;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import guru.qa.tests.page.RegistrationPage;
 
-public class PracticeFormTests {
+public class PracticeFormTests extends BaseTest {
     static Faker faker = new Faker();
     String firstName = faker.name().firstName(),
             lastName = faker.name().lastName(),
@@ -28,11 +26,6 @@ public class PracticeFormTests {
 
     RegistrationPage registrationPage = new RegistrationPage();
     CalendarComponent calendar = new CalendarComponent();
-
-    @BeforeAll
-    static void beforeAl() {
-        Configuration.startMaximized = true;
-    }
 
     @Test
     void submitFormTest() {
