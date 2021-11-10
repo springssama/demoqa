@@ -18,7 +18,7 @@ public class PracticeFormTests extends BaseTest {
             day = "23",
             date = day + " " + month + "," + year,
             subject = "English",
-            file = "img/cat.jpeg",
+            file = "cat.jpeg",
             address = "Russia",
             state = "NCR",
             city = "Delhi",
