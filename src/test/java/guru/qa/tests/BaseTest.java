@@ -1,22 +1,33 @@
 package guru.qa.tests;
 
 import com.codeborne.selenide.Configuration;
+import guru.qa.tests.config.CredentialsConfig;
 import guru.qa.tests.helpers.Attach;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import static java.lang.String.format;
+
 public class BaseTest {
+    public static CredentialsConfig registration =
+            ConfigFactory.create(CredentialsConfig.class);
     @BeforeAll
     public static void setUp() {
+        String login = registration.login();
+        String password = registration.password();
+        String url = System.getProperty("REMOTE_URL");
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;
         Configuration.startMaximized = true;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub/";
+        Configuration.remote = format("https://%s:%s@%s", login, password, url);
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "91.0");
+
     }
 
     @AfterEach
