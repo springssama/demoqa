@@ -17,14 +17,12 @@ public class BaseTest {
     public static void setUp() {
         String login = registration.login();
         String password = registration.password();
-        String url = System.getProperty("REMOTE_URL");
-
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;
         Configuration.startMaximized = true;
-        Configuration.remote = format("https://%s:%s@%s", login, password, url);
+        Configuration.remote = format("https://%s:%s@%s", login, password, System.getProperty("url"));
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "91.0");
 
